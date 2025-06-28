@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import Head from "next/head";
-import Link from "next/link";
 
 export default function MainPage() {
   const [count, setCount] = useState(0);
@@ -9,6 +8,9 @@ export default function MainPage() {
   useEffect(() => {
     // 초기 카운트 가져오기
     fetchCount();
+
+    // 2초마다 카운트 업데이트
+    const intervalId = setInterval(fetchCount, 2000);
 
     // SSE 연결 설정
     const eventSource = new EventSource("/api/events");
@@ -29,6 +31,7 @@ export default function MainPage() {
     };
 
     return () => {
+      clearInterval(intervalId);
       eventSource.close();
     };
   }, []);
