@@ -60,7 +60,6 @@ export default function MainPage() {
             {isConnected ? "🟢" : "🔴"}
           </div>
         </div>
-
         <div className="count-display">
           <h1>Текущий номер</h1>
           <div className="count-number">{count}</div>
