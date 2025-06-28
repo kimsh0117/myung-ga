@@ -8,7 +8,16 @@ export default function CountingPage() {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    // 초기 카운트 가져오기
     fetchCount();
+
+    // 2초마다 카운트 업데이트
+    const intervalId = setInterval(fetchCount, 2000);
+
+    return () => {
+      clearInterval(intervalId);
+      eventSource.close();
+    };
   }, []);
 
   const fetchCount = async () => {
